@@ -1,11 +1,12 @@
 import React from "react";
 import chair from "../../assets/images/chair.png";
 import headerBG from "../../assets/images/bg.png";
+import PrimaryButton from "../Shared/PrimaryButton";
 
 const Banner = () => {
 	return (
 		<div
-			className='hero min-h-screen px-5'
+			className='hero min-h-screen'
 			style={{ backgroundImage: `url(${headerBG})` }}>
 			<div className='hero-content flex-col flex flex-row justify-between lg:flex-row-reverse'>
 				<img
@@ -20,9 +21,7 @@ const Banner = () => {
 						industry. Lorem Ipsum has been the industry's standard dummy text
 						ever since the
 					</p>
-					<button className='btn btn-primary text-white font-bold bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary border-0'>
-						Get Started
-					</button>
+					<PrimaryButton>GET STARTED</PrimaryButton>
 				</div>
 			</div>
 		</div>

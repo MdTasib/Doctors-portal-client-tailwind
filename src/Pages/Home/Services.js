@@ -26,7 +26,7 @@ const Services = () => {
 		},
 	];
 	return (
-		<div className='py-20 px-5'>
+		<div className='py-20'>
 			<div className='text-center'>
 				<h3 className='text-primary  text-1xl font-bold uppercase'>
 					Our Services
