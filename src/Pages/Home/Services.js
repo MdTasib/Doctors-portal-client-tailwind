@@ -26,9 +26,9 @@ const Services = () => {
 		},
 	];
 	return (
-		<div className='py-20'>
+		<section className='py-20'>
 			<div className='text-center'>
-				<h3 className='text-primary  text-1xl font-bold uppercase'>
+				<h3 className='text-secondary  text-1xl font-bold uppercase'>
 					Our Services
 				</h3>
 				<h2 className='text-3xl'>Services We Provide</h2>
@@ -38,7 +38,7 @@ const Services = () => {
 					<Service key={service._id} service={service}></Service>
 				))}
 			</div>
-		</div>
+		</section>
 	);
 };
 
