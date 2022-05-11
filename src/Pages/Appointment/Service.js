@@ -1,7 +1,7 @@
 import React from "react";
 import PrimaryButton from "../Shared/PrimaryButton";
 
-const Service = ({ service }) => {
+const Service = ({ service, setTreatment }) => {
 	const { name, slots } = service;
 
 	return (
@@ -17,11 +17,14 @@ const Service = ({ service }) => {
 					{slots.length} {slots.length > 1 ? "SPACES" : "SPACE"} AVAILABLE
 				</p>
 				<div className='card-actions justify-end'>
-					<PrimaryButton
-						className='btn btn-primary'
-						disable={slots.length === 0}>
+					<label
+						onClick={() => setTreatment(service)}
+						htmlFor='booking-modal'
+						className={`btn btn-primary text-white font-bold bg-gradient-to-r from-secondary to-primary hover:from-primary hover:to-secondary border-0 modal-button ${
+							slots.length === 0 && "btn-disabled"
+						}`}>
 						Book Appointment
-					</PrimaryButton>
+					</label>
 				</div>
 			</div>
 		</div>
