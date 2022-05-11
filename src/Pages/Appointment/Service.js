@@ -1,5 +1,4 @@
 import React from "react";
-import PrimaryButton from "../Shared/PrimaryButton";
 
 const Service = ({ service, setTreatment }) => {
 	const { name, slots } = service;
