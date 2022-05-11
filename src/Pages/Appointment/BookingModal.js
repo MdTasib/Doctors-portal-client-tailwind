@@ -22,7 +22,7 @@ const BookingModal = ({ treatment, setTreatment, date }) => {
 						className='btn btn-sm btn-circle absolute right-2 top-2'>
 						✕
 					</label>
-					<h3 className='font-bold text-lg pb-5'>{name}</h3>
+					<h3 className='font-bold text-lg pb-5 text-secondary'>{name}</h3>
 					<form onSubmit={handleBooking}>
 						<input
 							value={format(date, "PP")}
