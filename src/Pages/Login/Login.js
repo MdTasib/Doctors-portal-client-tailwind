@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import {
 	useSignInWithEmailAndPassword,
@@ -18,6 +18,10 @@ const Login = () => {
 		handleSubmit,
 		formState: { errors },
 	} = useForm();
+	const navigate = useNavigate();
+	const location = useLocation();
+
+	const from = location.state?.from?.pathname || "/";
 
 	// loading spinner
 	if (googleLoading || loading) {
@@ -35,13 +39,12 @@ const Login = () => {
 	}
 
 	// submit login from
-	const onSubmit = data => {
-		console.log(data);
-		signInWithEmailAndPassword(data.email, data.password);
+	const onSubmit = async data => {
+		await signInWithEmailAndPassword(data.email, data.password);
 	};
 
 	if (googleUser || user) {
-		console.dir(googleUser || user);
+		navigate(from, { replace: true });
 	}
 
 	return (
