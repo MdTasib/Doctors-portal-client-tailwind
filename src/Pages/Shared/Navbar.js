@@ -1,7 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../firebase.init";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+	const [user] = useAuthState(auth);
+
+	const logout = () => {
+		signOut(auth);
+	};
+
 	const menuItems = (
 		<>
 			<li>
@@ -20,7 +29,13 @@ const Navbar = () => {
 				<Link to='/contact'>Contact</Link>
 			</li>
 			<li>
-				<Link to='/login'>Login</Link>
+				{user ? (
+					<button className='btn btn-ghost' onClick={logout}>
+						<small className='font-bold text-secondary'>Sign Out</small>
+					</button>
+				) : (
+					<Link to='/login'>Login</Link>
+				)}
 			</li>
 		</>
 	);
@@ -28,7 +43,7 @@ const Navbar = () => {
 		<div className='navbar bg-base-100 sticky top-0 z-10 border-b-2 border-gray-100'>
 			<div className='navbar-start'>
 				<div className='dropdown'>
-					<label tabIndex='0' className='btn btn-ghost lg:hidden'>
+					<label tabIndex='0' className='lg:hidden'>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							className='h-5 w-5'
@@ -49,7 +64,7 @@ const Navbar = () => {
 						{menuItems}
 					</ul>
 				</div>
-				<Link to='/' className='btn btn-ghost normal-case text-xl'>
+				<Link to='/' className='font-bold normal-case text-xl'>
 					Doctors Portal
 				</Link>
 			</div>
