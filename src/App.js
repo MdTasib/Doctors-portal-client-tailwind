@@ -7,6 +7,9 @@ import Appointment from "./Pages/Appointment/Appointment";
 import Singup from "./Pages/Login/Singup";
 import RequireAuth from "./Pages/Login/RequireAuth";
 import { Toaster } from "react-hot-toast";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import MyAppointment from "./Pages/Dashboard/MyAppointment";
+import MyReview from "./Pages/Dashboard/MyReview";
 
 function App() {
 	return (
@@ -24,6 +27,16 @@ function App() {
 						</RequireAuth>
 					}
 				/>
+				<Route
+					path='/dashboard'
+					element={
+						<RequireAuth>
+							<Dashboard />
+						</RequireAuth>
+					}>
+					<Route index element={<MyAppointment />} />
+					<Route path='/dashboard/review' element={<MyReview />} />
+				</Route>
 				<Route path='/login' element={<Login />} />
 				<Route path='/singup' element={<Singup />} />
 			</Routes>

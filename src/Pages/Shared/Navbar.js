@@ -28,6 +28,11 @@ const Navbar = () => {
 			<li>
 				<Link to='/contact'>Contact</Link>
 			</li>
+			{user && (
+				<li>
+					<Link to='/dashboard'>Dashboard</Link>
+				</li>
+			)}
 			<li>
 				{user ? (
 					<button className='btn btn-ghost' onClick={logout}>
@@ -40,7 +45,7 @@ const Navbar = () => {
 		</>
 	);
 	return (
-		<div className='navbar bg-base-100 sticky top-0 z-10 border-b-2 border-gray-100'>
+		<div className='navbar bg-base-100 sticky top-0 z-10 border-b-2 border-gray-100 px-10'>
 			<div className='navbar-start'>
 				<div className='dropdown'>
 					<label tabIndex='0' className='lg:hidden'>
@@ -64,13 +69,31 @@ const Navbar = () => {
 						{menuItems}
 					</ul>
 				</div>
-				<Link to='/' className='font-bold normal-case text-xl'>
-					Doctors Portal
+				<Link to='/' className='font-bold normal-case text-xl ml-5'>
+					Doctors <small className='text-secondary'>Portal</small>
 				</Link>
 			</div>
 			<div className='navbar-end hidden lg:flex'>
 				<ul className='menu menu-horizontal p-0'>{menuItems}</ul>
 			</div>
+			<label
+				htmlFor='dashboard-sidebar'
+				tabIndex='1'
+				className='drawer-button lg:hidden navbar-end'>
+				<svg
+					xmlns='http://www.w3.org/2000/svg'
+					className='h-5 w-5'
+					fill='none'
+					viewBox='0 0 24 24'
+					stroke='currentColor'>
+					<path
+						strokeLinecap='round'
+						strokeLinejoin='round'
+						strokeWidth='2'
+						d='M4 6h16M4 12h8m-8 6h16'
+					/>
+				</svg>
+			</label>
 		</div>
 	);
 };
