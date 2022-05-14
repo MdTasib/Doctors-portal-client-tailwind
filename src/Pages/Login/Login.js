@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import {
@@ -6,6 +6,7 @@ import {
 	useSignInWithGoogle,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
+import useToken from "../../hooks/useToken";
 import Loading from "../Shared/Loading";
 
 const Login = () => {
@@ -20,8 +21,15 @@ const Login = () => {
 	} = useForm();
 	const navigate = useNavigate();
 	const location = useLocation();
+	const [token] = useToken(user || googleUser);
 
 	const from = location.state?.from?.pathname || "/";
+
+	useEffect(() => {
+		if (token) {
+			navigate(from, { replace: true });
+		}
+	}, [token, from, navigate]);
 
 	// loading spinner
 	if (googleLoading || loading) {
@@ -42,10 +50,6 @@ const Login = () => {
 	const onSubmit = async data => {
 		await signInWithEmailAndPassword(data.email, data.password);
 	};
-
-	if (googleUser || user) {
-		navigate(from, { replace: true });
-	}
 
 	return (
 		<div className='flex justify-center items-center h-screen'>
