@@ -8,6 +8,7 @@ import {
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import Loading from "../Shared/Loading";
+import useToken from "../../hooks/useToken";
 
 const Singup = () => {
 	const [signInWithGoogle, googleUser, googleLoading, googleError] =
@@ -21,6 +22,7 @@ const Singup = () => {
 		formState: { errors },
 	} = useForm();
 	const navigate = useNavigate();
+	const [token] = useToken(googleUser || user);
 
 	// loading spinner
 	if (googleLoading || loading || updating) {
@@ -43,11 +45,10 @@ const Singup = () => {
 	const onSubmit = async data => {
 		await createUserWithEmailAndPassword(data.email, data.password);
 		await updateProfile({ displayName: data.name });
-		navigate("/appointment");
 	};
 
-	if (googleUser || user) {
-		console.dir(googleUser || user);
+	if (token) {
+		navigate("/appointment");
 	}
 
 	return (
