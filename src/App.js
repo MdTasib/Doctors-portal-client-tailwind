@@ -10,6 +10,9 @@ import { Toaster } from "react-hot-toast";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import MyAppointment from "./Pages/Dashboard/MyAppointment";
 import MyReview from "./Pages/Dashboard/MyReview";
+import History from "./Pages/Dashboard/History";
+import Users from "./Pages/Dashboard/Users";
+import RequireAdmin from "./Pages/Dashboard/RequireAdmin";
 
 function App() {
 	return (
@@ -36,6 +39,15 @@ function App() {
 					}>
 					<Route index element={<MyAppointment />} />
 					<Route path='/dashboard/review' element={<MyReview />} />
+					<Route path='/dashboard/history' element={<History />} />
+					<Route
+						path='/dashboard/users'
+						element={
+							<RequireAdmin>
+								<Users />
+							</RequireAdmin>
+						}
+					/>
 				</Route>
 				<Route path='/login' element={<Login />} />
 				<Route path='/singup' element={<Singup />} />
