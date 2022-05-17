@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import Loading from "../Shared/Loading";
 
@@ -8,6 +9,7 @@ const AddDoctor = () => {
 		register,
 		handleSubmit,
 		formState: { errors },
+		reset,
 	} = useForm();
 
 	const { data: services, isLoading } = useQuery("services", () =>
@@ -36,6 +38,24 @@ const AddDoctor = () => {
 						specialty: data.specialty,
 						img,
 					};
+
+					fetch(`http://localhost:5000/doctor`, {
+						method: "POST",
+						headers: {
+							"content-type": "application/json",
+							authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+						},
+						body: JSON.stringify(doctor),
+					})
+						.then(res => res.json())
+						.then(data => {
+							if (data.insertedId) {
+								toast.success("Doctor Added Successfully");
+							} else {
+								toast.error("Failed To Add Doctor");
+							}
+							reset();
+						});
 				}
 			});
 	};
