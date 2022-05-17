@@ -14,8 +14,30 @@ const AddDoctor = () => {
 		fetch("http://localhost:5000/service").then(res => res.json())
 	);
 
+	const imageApiKey = "eb7bb93d7839539a8bddb41471f7e0da";
+
 	const onSubmit = async data => {
-		console.log("data", data);
+		const image = data.image[0];
+		const formData = new FormData();
+		formData.append("image", image);
+
+		fetch(`https://api.imgbb.com/1/upload?key=${imageApiKey}`, {
+			method: "POST",
+			body: formData,
+		})
+			.then(res => res.json())
+			.then(result => {
+				if (result.success) {
+					const img = result.data.url;
+
+					const doctor = {
+						name: data.name,
+						email: data.email,
+						specialty: data.specialty,
+						img,
+					};
+				}
+			});
 	};
 
 	if (isLoading) {
