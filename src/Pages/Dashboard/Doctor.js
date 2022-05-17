@@ -1,25 +1,8 @@
 import React from "react";
-import toast from "react-hot-toast";
 
-const Doctor = ({ doctor, index, refetch }) => {
-	const { img, name, specialty, email } = doctor;
+const Doctor = ({ doctor, index, refetch, setDeleteDoctor }) => {
+	const { img, name, specialty } = doctor;
 
-	const handleDelete = email => {
-		const confirm = window.confirm(`Are you sure delete Doctor ${name}?`);
-		if (confirm) {
-			fetch(`http://localhost:5000/doctor/${email}`, {
-				method: "DELETE",
-				headers: {
-					authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-				},
-			})
-				.then(res => res.json())
-				.then(data => {
-					toast.success(`Doctor ${name} is deleted`);
-					refetch();
-				});
-		}
-	};
 	return (
 		<tr>
 			<th>{index + 1}</th>
@@ -33,8 +16,9 @@ const Doctor = ({ doctor, index, refetch }) => {
 			<td className='font-bold'>{name}</td>
 			<td>{specialty}</td>
 			<td>
-				<button
-					onClick={() => handleDelete(email)}
+				<label
+					htmlFor='delete-docotr-modal'
+					onClick={() => setDeleteDoctor(doctor)}
 					className='btn btn-circle btn-outline btn-error btn-sm'>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
@@ -49,7 +33,7 @@ const Doctor = ({ doctor, index, refetch }) => {
 							d='M6 18L18 6M6 6l12 12'
 						/>
 					</svg>
-				</button>
+				</label>
 			</td>
 		</tr>
 	);
