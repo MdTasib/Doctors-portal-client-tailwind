@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import auth from "../../firebase.init";
 import Loading from "../Shared/Loading";
 
@@ -33,7 +33,7 @@ const MyAppointment = () => {
 	}
 
 	return (
-		<div className='px-5'>
+		<div className=''>
 			<h2>my appointment page : {appointments.length}</h2>
 			<div className='overflow-x-auto'>
 				<table className='table w-full'>
@@ -44,6 +44,7 @@ const MyAppointment = () => {
 							<th>Date</th>
 							<th>Time</th>
 							<th>Treatment</th>
+							<th>Payment</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -54,6 +55,20 @@ const MyAppointment = () => {
 								<td>{appointment.date}</td>
 								<td>{appointment.slot}</td>
 								<td>{appointment.treatment}</td>
+								<td>
+									{appointment.price && !appointment.paid && (
+										<Link to={`/dashboard/payment/${appointment._id}`}>
+											<button className='btn btn-secondary btn-xs text-white'>
+												Pay
+											</button>
+										</Link>
+									)}
+									{appointment.price && appointment.paid && (
+										<small className='badge text-xs badge-primary text-white'>
+											PAID
+										</small>
+									)}
+								</td>
 							</tr>
 						))}
 					</tbody>

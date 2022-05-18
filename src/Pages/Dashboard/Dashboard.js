@@ -18,26 +18,26 @@ const Dashboard = () => {
 			</div>
 			<div className='drawer-side z-0'>
 				<label htmlFor='dashboard-sidebar' className='drawer-overlay'></label>
-				<ul className='menu p-4 overflow-y-auto w-80 bg-secondary text-base-content'>
+				<ul className='menu p-4 overflow-y-auto w-70 bg-secondary text-base-content'>
 					{/* <!-- Sidebar content here --> */}
-					<li>
+					<li className='text-white'>
 						<Link to='/dashboard'>My Appointment</Link>
 					</li>
-					<li>
+					<li className='text-white'>
 						<Link to='/dashboard/review'>My Review</Link>
 					</li>
-					<li>
+					<li className='text-white'>
 						<Link to='/dashboard/history'>My History</Link>
 					</li>
 					{admin && (
 						<>
-							<li>
+							<li className='text-white'>
 								<Link to='/dashboard/users'>All Users</Link>
 							</li>
-							<li>
+							<li className='text-white'>
 								<Link to='/dashboard/manageDoctor'>All Doctors</Link>
 							</li>
-							<li>
+							<li className='text-white'>
 								<Link to='/dashboard/addDoctor'>Add Doctor</Link>
 							</li>
 						</>
